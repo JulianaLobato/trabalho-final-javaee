@@ -18,18 +18,21 @@ Trabalho final da materia javaee.
 ### 4. Métodos API
 
   1. Investidores  
-    - Listar: 
-        GET http://localhost:8080/api/v1/investors
-    - Criar: 
-        POST http://localhost:8080/api/v1/investors
+      - Listar: 
+          GET http://localhost:8080/api/v1/investors
+          
+      - Criar: 
+          POST http://localhost:8080/api/v1/investors
     
   2. Empresas  
-    - Listar: 
-        GET http://localhost:8080/api/v1/companies
-    - Criar: 
-        POST http://localhost:8080/api/v1/companies
+      - Listar: 
+          GET http://localhost:8080/api/v1/companies
+          
+      - Criar: 
+          POST http://localhost:8080/api/v1/companies
     
   3. Ações
+  
     1. Investidor
       - Listar Compras: 
           GET http://localhost:8080/api/v1/stocks/buy/
