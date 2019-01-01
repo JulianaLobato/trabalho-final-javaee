@@ -31,24 +31,23 @@ Trabalho final da materia javaee.
       - Criar: 
           POST http://localhost:8080/api/v1/companies
     
-  3. Ações
-  
+  3. Ações  
     1. Investidor
-      - Listar Compras: 
-          GET http://localhost:8080/api/v1/stocks/buy/
+        - Listar Compras: 
+            GET http://localhost:8080/api/v1/stocks/buy/
           
-      - Comprar:
-          POST http://localhost:8080/api/v1/stocks/buy/
-          POST http://localhost:8080/api/v1/stocks/buy/{transactionId}/
-          POST http://localhost:8080/api/v1/stocks/buy/{transactionId}/{investorId}
+        - Comprar:
+            POST http://localhost:8080/api/v1/stocks/buy/
+            POST http://localhost:8080/api/v1/stocks/buy/{transactionId}/
+            POST http://localhost:8080/api/v1/stocks/buy/{transactionId}/{investorId}
         
-       - Listar Vendas: 
-          GET http://localhost:8080/api/v1/stocks/sell/
+        - Listar Vendas: 
+            GET http://localhost:8080/api/v1/stocks/sell/
           
-       - Vender:
-          POST http://localhost:8080/api/v1/stocks/sell/
-          POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/
-          POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/{investorId}
+        - Vender:
+            POST http://localhost:8080/api/v1/stocks/sell/
+            POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/
+            POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/{investorId}
           
     2. Empresa
         - Listar:
