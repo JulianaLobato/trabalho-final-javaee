@@ -47,7 +47,7 @@ Trabalho final da materia javaee.
           POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/
           POST http://localhost:8080/api/v1/stocks/sell/{transactionId}/{investorId}
           
-      2. Empresa
+    2. Empresa
         - Listar:
             GET http://localhost:8080/api/v1/stocks/emit/{companyId}
             
