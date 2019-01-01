@@ -5,7 +5,7 @@ import java.util.Set;
 import com.javaee.juliana.investments.domain.MessageId;
 import com.javaee.juliana.investments.domain.Transaction;
 import com.javaee.juliana.investments.domain.StockDemand;
-import ccom.javaee.juliana.investments.domain.StockMarket;
+import com.javaee.juliana.investments.domain.StockMarket;
 import com.javaee.juliana.investments.domain.StockOffer;
 
 public interface TransactionService {

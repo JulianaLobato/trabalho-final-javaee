@@ -52,25 +52,24 @@ public class TransactionController {
 	public TransactionRest getById(@PathVariable String id) {
 		return new TransactionRest(transactionService.getById(id));
 	}
-	/* Listar ações (Fim)*/
+	/* Listar ações (Fim) */
 
-
-	/* Emissão de Ações (Inicio)*/	
+	/* Emissão de Ações (Inicio) */	
 	// GET
 	@GetMapping({ "/emit/{companyId}" })
 	@ResponseStatus(HttpStatus.OK)
 	public Set<TransactionRest> getAllCompany(@PathVariable String companyId) {
-		Set<TransactionRest> transactionRest = new HashSet<>();
-		companyService.getAllStocks(companyId).forEach((Transaction transaction) -> {
-			transactionRest.add(new TransactionRest(transaction));
+		Set<TransactionRest> stockRest = new HashSet<>();
+		companyService.getAllTransactions(companyId).forEach((Transaction transaction) -> {
+			stockRest.add(new TransactionRest(transaction));
 		});
-		return transactionRest;
+		return stockRest;
 	}
 
 	@GetMapping({ "/emit/{companyId}/{stockId}" })
 	@ResponseStatus(HttpStatus.OK)
-	public TransactionRest getById(@PathVariable String companyId, @PathVariable String stockId) {
-		return new TransactionRest (companyService.getStockById(companyId, stockId));
+	public TransactionRest getById(@PathVariable String companyId, @PathVariable String transactionId) {
+		return new TransactionRest (companyService.getTransactionById(companyId, transactionId));
 	}
 
 	// POST
@@ -79,10 +78,9 @@ public class TransactionController {
 	public TransactionRest createNew(@PathVariable String companyId, @RequestBody Transaction transaction) {
 		return new TransactionRest(transactionService.emitNew(companyId, transaction));
 	}
-	/* Emissão de Ações (Fim)*/
-
-
-	/* Vender ações (Inicio)*/
+	/* Emissão de Ações (Fim) */
+	
+	/* Vender ações (Inicio) */
 	// GET
 	@GetMapping({ "/sell" })
 	@ResponseStatus(HttpStatus.OK)
@@ -119,10 +117,9 @@ public class TransactionController {
 		stockMarket.setInvestorId(investorId);
 		return transactionService.sendMessage("offer", stockMarket);
 	}
-	/* Vender ações (Fim)*/
+	/* Vender ações (Fim) */
 
-
-	/* Comprar ações (Inicio)*/
+	/* Comprar ações (Inicio) */
 	// GET
 	@GetMapping({ "/buy" })
 	@ResponseStatus(HttpStatus.OK)
@@ -147,17 +144,17 @@ public class TransactionController {
 
 	@PostMapping({ "/buy/{stockId}" })
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageId buyStock(@PathVariable String stockId, @RequestBody StockMarket stockMarket) {
-		stockMarket.setStockId(stockId);
+	public MessageId buyStock(@PathVariable String transactionId, @RequestBody StockMarket stockMarket) {
+		stockMarket.setStockId(transactionId);
 		return transactionService.sendMessage("demand", stockMarket);
 	}
 
 	@PostMapping({ "/buy/{stockId}/{investorId}" })
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageId buyStockInvestor(@PathVariable String stockId, @PathVariable String investorId, @RequestBody StockMarket stockMarket) {
-		stockMarket.setStockId(stockId);
+	public MessageId buyStockInvestor(@PathVariable String transactionId, @PathVariable String investorId, @RequestBody StockMarket stockMarket) {
+		stockMarket.setStockId(transactionId);
 		stockMarket.setInvestorId(investorId);
 		return transactionService.sendMessage("demand", stockMarket);
 	}
-	/* Comprar ações (Fim)*/
+	/* Comprar ações (Fim) */
 }

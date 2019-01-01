@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ccom.javaee.juliana.investments.domain.Investor;
+import com.javaee.juliana.investments.domain.Investor;
 import com.javaee.juliana.investments.repositories.InvestorRepository;
 
 @Service

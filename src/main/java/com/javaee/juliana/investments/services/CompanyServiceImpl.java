@@ -18,15 +18,15 @@ public class CompanyServiceImpl implements CompanyService {
 	private CompanyRepository companyRepository;
 	@Autowired
 	private TransactionService transactionService;
-	//@Autowired
-	//private TransactionRepository stransactionRepository;
 
+	@Override
 	public Set<Company> getAll() {
 		Set<Company> companies = new HashSet<>();
 		companyRepository.findAll().iterator().forEachRemaining(companies::add);
 		return companies;
 	}
 
+	@Override
 	public Company getById(String id) {
 		return getCompanyById(id);
 	}
@@ -41,6 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyOptional.get();
 	}
 
+	@Override
 	public Company createNew(Company company) {
 		Company companyInd0;
 		try {
@@ -51,16 +52,19 @@ public class CompanyServiceImpl implements CompanyService {
 		throw new IllegalArgumentException("Company already exists with ID: " + companyInd0.getId());
 	}
 
+	@Override
 	public Company save(String id, Company company) {
 		company.setId(id);
 		return companyRepository.save(company);
 	}
 
+	@Override
 	public void deleteById(String id) {
 		companyRepository.deleteById(id);
 	}
-
-	public Company addStock(String companyId, Transaction transaction) {
+	
+	@Override
+	public Company addTransaction(String companyId, Transaction transaction) {
 		Company company = getCompanyById(companyId);
 		Set<Transaction> transactions = company.getTransaction();
 		transactions.remove(null);
@@ -69,17 +73,19 @@ public class CompanyServiceImpl implements CompanyService {
 		return save(companyId, company);
 	}
 
-	public Set<Transaction> getAllStocks(String companyId) {
+	@Override
+	public Set<Transaction> getAllTransactions(String companyId) {
 		return getCompanyById(companyId).getTransaction();
 	}
 
-	public Transaction getStockById(String companyId, String stockId) {
+	@Override
+	public Transaction getTransactionById(String companyId, String transactionId) {
 		for (Transaction transaction : getCompanyById(companyId).getTransaction()) {
-			if (transaction.getId().equals(stockId)) {
+			if (transaction.getId().equals(transactionId)) {
 				return transaction;
 			}
 		}
-		throw new IllegalArgumentException("Stock not found for ID value: " + stockId.toString() + " for Company " + companyId.toString());
+		throw new IllegalArgumentException("Transaction not found for ID value: " + transactionId.toString() + " for Company " + companyId.toString());
 	}
 
 }

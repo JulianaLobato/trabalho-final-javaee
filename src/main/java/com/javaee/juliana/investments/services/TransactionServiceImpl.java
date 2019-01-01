@@ -47,35 +47,35 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public Set<Transaction> getAll() {
-		Set<Transaction> transaction = new HashSet<>();
-		transactionRepository.findAll().iterator().forEachRemaining(transaction::add);
-		return transaction;
+		Set<Transaction> transactions = new HashSet<>();
+		transactionRepository.findAll().iterator().forEachRemaining(transactions::add);
+		return transactions;
 	}
 
 	@Override
 	public Transaction getById(String id) {
-		return getStockById(id);
+		return getTransactionById(id);
 	}
 
-	private Transaction getStockById(String id) {
-		Optional<Transaction> stockOptional = transactionRepository.findById(id);
+	private Transaction getTransactionById(String id) {
+		Optional<Transaction> transactionOptional = transactionRepository.findById(id);
 
-		if (!stockOptional.isPresent()) {
-			throw new IllegalArgumentException("Stock not found for ID value: " + id.toString());
+		if (!transactionOptional.isPresent()) {
+			throw new IllegalArgumentException("Transaction not found for ID value: " + id.toString());
 		}
 
-		return stockOptional.get();
+		return transactionOptional.get();
 	}
 	
 	@Override
 	public Transaction createNew(Transaction transaction) {
-		Transaction stockInd0;
+		Transaction transactionInd0;
 		try {
-			stockInd0 = transactionRepository.findByName(transaction.getName()).get(0);
+			transactionInd0 = transactionRepository.findByName(transaction.getName()).get(0);
 		} catch (Exception e) {
 			return transactionRepository.save(transaction);
 		}
-		throw new IllegalArgumentException("stock already exists with ID: " + stockInd0.getId());
+		throw new IllegalArgumentException("stock already exists with ID: " + transactionInd0.getId());
 	}
 
 	@Override
@@ -83,9 +83,9 @@ public class TransactionServiceImpl implements TransactionService {
 		Company company = companyService.getById(companyId);
 		transaction.setCompany(company); //stock.setCompanyId(company.getId());
 		transaction.setQuantityCompany(transaction.getQuantity());
-		Set<Transaction> transactions = company.getStocks();
+		Set<Transaction> transactions = company.getTransaction();
 		transactions.add(transaction);
-		company.setStocks(transactions);
+		company.setTransaction(transactions);
 		this.createNew(transaction);
 		companyService.save(companyId, company);
 
@@ -106,23 +106,19 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void deleteById(String id) {
-		transactionRepository.deleteById(id);
-	}
-
-	@Override
 	public Set<StockDemand> getAllDemands() {
 		return demandService.getAll();
-		
-	    //Comparator<Person> comparator = Comparator.comparing(person -> person.name);
-	    //comparator = comparator.thenComparing(Comparator.comparing(person -> person.age));
-		//return null;
 	}
 
 	@Override
 	public Set<StockOffer> getAllOffers() {
 		
 		return null;
+	}
+	
+	@Override
+	public void deleteById(String id) {
+		transactionRepository.deleteById(id);
 	}
 
 }

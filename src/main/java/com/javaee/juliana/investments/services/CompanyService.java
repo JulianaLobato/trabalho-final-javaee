@@ -16,9 +16,9 @@ public interface CompanyService {
 
 	void deleteById(String id);
 
-	Company addStock(String id, Transaction transaction);
+	Company addTransaction(String id, Transaction transaction);
 
-	Set<Transaction> getAllStocks(String companyId);
+	Set<Transaction> getAllTransactions(String companyId);
 
-	Transaction getStockById(String companyId, String stockId);
+	Transaction getTransactionById(String companyId, String transactionId);
 }
